@@ -47,7 +47,7 @@
 
 - 每个学习阶段一个分支 `phase-N`，下一个阶段的分支必须等上一阶段正式完成后，基于其完成态开出
 - 每阶段完成后合并回 `main`，`main` 始终是最新稳定版
-- 当前最新稳定版：`main` = Phase 4
+- 当前最新稳定版：`main` = Phase 7
 
 ---
 
@@ -62,6 +62,7 @@
 | Phase 4 | LangGraph 进阶 | ✅ | `10` `11` `12` |
 | Phase 5 | LangSmith 观测与评测 | ✅ | `13` `14` |
 | Phase 6 | 综合实战项目（客服 API） | ✅ | `customer_service/` `app.py` `test_api.py` |
+| Phase 7 | 前端实战（Vue 3 客服控制台） | ✅ | `frontend/` |
 
 ---
 
@@ -129,13 +130,20 @@
 - 核心理解：把 01-14 学到的一切合成一个**可交付应用**——RAG + 工具 + 多轮记忆 + 人工审批 + LangSmith 监控，打包成 API
 - 关键工程经验：工具 agent 用 `temperature=0` 保证"该调工具就调工具"；持久化状态会跨运行残留，测试要重置 checkpointer
 
+### Phase 7 · 前端实战：客服控制台（Vue 3 + Element Plus） ✅
+- `frontend/` — Vite 项目，pnpm 管理依赖；`api.js`（fetch 封装）、`App.vue`（布局 + 状态）、`SessionList` / `MessageList` / `ApprovalCard` 三个组件
+- 技术栈：Vue 3 + Vite 7 + Element Plus（全量引入）+ 原生 fetch，**不引入 router / pinia**（控制台单屏，状态放 App.vue + props/emit 足够）
+- 关键设计：Vite dev proxy 把 `/api/*` 转发到 `127.0.0.1:8000`，**后端零改动**；会话列表用 localStorage 记忆（后端没有"列会话"接口）
+- 交互：下单 → 后端返回 `pending_approval` → 前端渲染订单审批卡片 → 批准/拒绝 → 显示结果；审批挂起期输入框禁用，避免在 interrupt 暂停点再发消息
+- 核心理解：前端只是后端 4 个端点的消费者，把 Phase 4 的 HITL 审批从 curl 搬到了可视化的按钮上；SSE 流式输出是下一步方向
+
 ---
 
 ## 七、学习完成 🎉
 
-**六个阶段全部完成**。你现在具备从零构建一个带记忆、带工具、可审批、可观测的 LLM 客服应用的能力。
+**七个阶段全部完成**。你现在具备从零构建一个带记忆、带工具、可审批、可观测的 LLM 客服应用，以及配套 Web 前端（Vue 3）的能力——已经是完整的前后端全栈。
 
 后续可以延伸的方向：
 - 部署：Docker + 云服务器 / LangGraph Server
-- 增强：流式输出（SSE）、用户身份体系、权限控制
+- 增强：流式输出（SSE，前端打字机效果）、用户身份体系、权限控制、前端按需打包
 - 优化：RAG 评测回归（改知识库/提示词后跑 `14_evaluate.py` 守质量）

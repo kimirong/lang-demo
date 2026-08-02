@@ -29,6 +29,7 @@
 | Phase 4 | LangGraph 进阶（人工审批 / 多 Agent / 长期记忆） | `10` `11` `12` |
 | Phase 5 | LangSmith（自动埋点 / 读 trace / 评测回归） | `13` `14` |
 | Phase 6 | 综合实战：客服 agent 打包成 FastAPI | `customer_service/` `app.py` `test_api.py` |
+| Phase 7 | 前端实战：Vue 3 客服控制台 | `frontend/` |
 
 > 📖 完整计划、每阶段概念、踩坑速查见 **[LEARNING_PLAN.md](LEARNING_PLAN.md)**
 
@@ -85,6 +86,7 @@ cp .env.example .env
 | `customer_service/` | P6 | 客服业务包：RAG 检索 / 工具 / agent 图 |
 | `app.py` | P6 | FastAPI 入口（/health /chat /approve /history） |
 | `test_api.py` | P6 | 端到端测试（11 项断言全过） |
+| `frontend/` | P7 | Vue 3 前端控制台（聊天 / 会话历史 / 下单审批） |
 | `data/company_manual.md` | 测试 | 测试知识库（虚构员工手册） |
 
 ### 🚀 启动客服 API（Phase 6）
@@ -97,6 +99,25 @@ curl http://127.0.0.1:8000/health
 curl -X POST http://127.0.0.1:8000/chat -H "Content-Type: application/json" \
      -d '{"session_id":"demo-1","message":"试用期多久？"}'
 ```
+
+### 🖥 前端控制台（Phase 7）
+
+```bash
+# 1. 先启动后端（见上）
+.venv/bin/uvicorn app:app --port 8000
+
+# 2. 启动前端（需 Node 18+ / pnpm）
+cd frontend
+pnpm install
+pnpm dev            # 打开 http://localhost:5173
+
+# 生产构建（可选）
+pnpm build          # 产物在 frontend/dist/
+```
+
+- 前端所有请求走 `/api/*`，由 Vite 开发代理转发到 `127.0.0.1:8000`，**后端零改动**
+- 支持：多会话聊天、会话历史（localStorage 记忆）、**下单人工审批**（批准/拒绝按钮）
+- 下单时后端返回 `pending_approval` → 前端渲染订单审批卡片 → 批准/拒绝后展示结果
 
 ## ⚠️ 踩坑速查
 
