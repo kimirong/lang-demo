@@ -11,8 +11,10 @@ __pycache__/
 # 运行产物
 *.log
 
-# SQLite 向量数据库文件（本地数据，不提交）
+# SQLite 数据库文件 + WAL 日志（本地数据，不提交）
 *.db
+*.db-wal
+*.db-shm
 
 # IDE 配置（JetBrains 系），本地数据源等不入库
 .idea/

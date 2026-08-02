@@ -28,6 +28,7 @@
 | Phase 3 | LangGraph 入门（手搓 agent 循环 / 多轮记忆） | `07` `08` `09` |
 | Phase 4 | LangGraph 进阶（人工审批 / 多 Agent / 长期记忆） | `10` `11` `12` |
 | Phase 5 | LangSmith（自动埋点 / 读 trace / 评测回归） | `13` `14` |
+| Phase 6 | 综合实战：客服 agent 打包成 FastAPI | `customer_service/` `app.py` `test_api.py` |
 
 > 📖 完整计划、每阶段概念、踩坑速查见 **[LEARNING_PLAN.md](LEARNING_PLAN.md)**
 
@@ -81,7 +82,21 @@ cp .env.example .env
 | `12_longterm_memory.py` | P4 | InMemoryStore 长期记忆 |
 | `13_read_traces.py` | P5 | 用 SDK 读 trace 树、定位问题 |
 | `14_evaluate.py` | P5 | 数据集 + 评测，好/坏提示词对比 |
+| `customer_service/` | P6 | 客服业务包：RAG 检索 / 工具 / agent 图 |
+| `app.py` | P6 | FastAPI 入口（/health /chat /approve /history） |
+| `test_api.py` | P6 | 端到端测试（11 项断言全过） |
 | `data/company_manual.md` | 测试 | 测试知识库（虚构员工手册） |
+
+### 🚀 启动客服 API（Phase 6）
+
+```bash
+.venv/bin/uvicorn app:app --port 8000
+# 快速验证
+.venv/bin/python test_api.py          # 端到端测试
+curl http://127.0.0.1:8000/health
+curl -X POST http://127.0.0.1:8000/chat -H "Content-Type: application/json" \
+     -d '{"session_id":"demo-1","message":"试用期多久？"}'
+```
 
 ## ⚠️ 踩坑速查
 

@@ -61,7 +61,7 @@
 | Phase 3 | LangGraph 入门 | ✅ | `07` `08` `09` |
 | Phase 4 | LangGraph 进阶 | ✅ | `10` `11` `12` |
 | Phase 5 | LangSmith 观测与评测 | ✅ | `13` `14` |
-| Phase 6 | 综合实战项目 | ⬜ 下一步 | — |
+| Phase 6 | 综合实战项目（客服 API） | ✅ | `customer_service/` `app.py` `test_api.py` |
 
 ---
 
@@ -122,16 +122,20 @@
 
 ---
 
-## 七、下一步：Phase 6 — 综合实战项目 🏆
+### Phase 6 · 综合实战项目：DeepSeek 智能客服助手 ✅
+- `customer_service/` 包 — `rag.py`（SQLite 向量库检索）、`tools.py`（查手册/计算/下单审批）、`graph.py`（手工 agent 图 + SqliteSaver 持久记忆）
+- `app.py` — FastAPI：`/health` `/chat` `/approve` `/history`
+- `test_api.py` — 端到端测试 11 项断言全过
+- 核心理解：把 01-14 学到的一切合成一个**可交付应用**——RAG + 工具 + 多轮记忆 + 人工审批 + LangSmith 监控，打包成 API
+- 关键工程经验：工具 agent 用 `temperature=0` 保证"该调工具就调工具"；持久化状态会跨运行残留，测试要重置 checkpointer
 
-前五个阶段学完了 LangChain / LangGraph / LangSmith 的完整能力，最后把它们拼成一个可交付的应用。
+---
 
-**项目设想：「DeepSeek 智能客服助手」**
-- RAG 知识库（员工手册）→ 回答业务问题
-- 计算工具 → 处理数值
-- 多轮记忆（thread_id + checkpointer）→ 记住上下文
-- 人工确认（interrupt）→ 关键操作需审批
-- LangSmith → 全程监控 + 评测守护
-- 最后打包成 API 服务（FastAPI / LangServe），真正跑起来被调用
+## 七、学习完成 🎉
 
-> 在正式编写代码前，建议先用 EnterPlanMode 规划项目结构与实现步骤。
+**六个阶段全部完成**。你现在具备从零构建一个带记忆、带工具、可审批、可观测的 LLM 客服应用的能力。
+
+后续可以延伸的方向：
+- 部署：Docker + 云服务器 / LangGraph Server
+- 增强：流式输出（SSE）、用户身份体系、权限控制
+- 优化：RAG 评测回归（改知识库/提示词后跑 `14_evaluate.py` 守质量）
