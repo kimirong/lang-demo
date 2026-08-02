@@ -1,0 +1,12 @@
+# 密钥文件 —— 绝不提交
+.env
+api-key.txt
+*.key
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# 运行产物
+*.log
