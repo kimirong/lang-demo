@@ -10,6 +10,10 @@
 import os
 import sqlite3
 
+# 必须最先 import：model.py 会设置 HF_HUB_OFFLINE，且要在
+# huggingface_hub 被 import 之前完成（否则离线变量不生效）
+from model import get_llm
+
 import sqlite_vec
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import SQLiteVec
@@ -18,8 +22,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-
-from model import get_llm
 
 # ========== 配置 ==========
 DB_FILE = "data/vector_store.db"

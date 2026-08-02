@@ -14,6 +14,10 @@ RAG = 检索(Retrieval) + 生成(Generation)。
   ⑤ 拼提示词 + 回答
 """
 
+# 必须最先 import：model.py 会设置 HF_HUB_OFFLINE，且要在
+# huggingface_hub 被 import 之前完成（否则离线变量不生效）
+from model import get_llm
+
 from langchain_community.document_loaders import TextLoader
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
@@ -21,8 +25,6 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-
-from model import get_llm
 
 # ========== ① 加载文档 ==========
 loader = TextLoader("data/company_manual.md", encoding="utf-8")
