@@ -60,8 +60,8 @@
 | Phase 2 | RAG 检索增强 | ✅ | `05`（内存版）`06`（SQLite版） |
 | Phase 3 | LangGraph 入门 | ✅ | `07` `08` `09` |
 | Phase 4 | LangGraph 进阶 | ✅ | `10` `11` `12` |
-| Phase 5 | LangSmith 观测与评测 | ⬜ 下一步 | — |
-| Phase 6 | 综合实战项目 | ⬜ | — |
+| Phase 5 | LangSmith 观测与评测 | ✅ | `13` `14` |
+| Phase 6 | 综合实战项目 | ⬜ 下一步 | — |
 
 ---
 
@@ -94,6 +94,12 @@
 - `11_supervisor_multiagent.py` — supervisor 模式：主管用工具调用路由，员工产出作为 ToolMessage 回填
 - `12_longterm_memory.py` — `InMemoryStore` + 语义索引，跨会话长期记忆
 - 记忆体系对比：
+
+### Phase 5 · LangSmith 观测与评测 ✅
+- 配置：`.env` 里 `LANGSMITH_API_KEY` + `LANGSMITH_TRACING=true`，加代理（HTTP 代理即可，socks5 需 socksio）
+- `13_read_traces.py` — 用 SDK 拉取 trace 树，看结构/耗时/token，定位最慢子步骤
+- `14_evaluate.py` — 建数据集 + `@run_evaluator` 自定义评测器，跑 good vs bad 提示词对比实验
+- 核心理解：自动埋点零代码；评测器（keyword_hit 脆弱 vs LLM judge 语义）是质量守门员；改提示词前后跑测试集 = 回归测试
   ```
   短期记忆  thread_id + checkpointer  → 这一场对话
   长期记忆  InMemoryStore + namespace  → 这个人一直记得什么

@@ -8,6 +8,12 @@ HF_HUB_OFFLINE 离线变量，而 huggingface_hub 在 import 时就会把
 
 import os
 
+from dotenv import load_dotenv
+
+# 必须先加载 .env：里面既有 LANGSMITH_* 和代理变量，也有 HF_HUB_OFFLINE
+# 相关的设置时机要求 —— 必须在任何 langchain 库初始化之前生效。
+load_dotenv()
+
 # 在 import 任何可能引入 huggingface_hub 的库之前设置离线变量。
 # 模型已缓存就强制离线加载（中国网络无法直连 huggingface.co）。
 if os.getenv("HF_HUB_OFFLINE") is None and os.path.isdir(
@@ -15,10 +21,7 @@ if os.getenv("HF_HUB_OFFLINE") is None and os.path.isdir(
 ):
     os.environ["HF_HUB_OFFLINE"] = "1"
 
-from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-
-load_dotenv()
 
 
 def get_llm(model: str = "deepseek-chat", **kwargs) -> ChatOpenAI:
