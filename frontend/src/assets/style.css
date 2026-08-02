@@ -147,7 +147,6 @@ body {
   border-radius: 8px;
   font-size: 14px;
   line-height: 1.6;
-  white-space: pre-wrap;
   word-break: break-word;
 }
 
@@ -155,6 +154,7 @@ body {
   background: #409eff;
   color: #fff;
   border-top-right-radius: 2px;
+  white-space: pre-wrap; /* 用户消息纯文本，保留换行 */
 }
 
 .msg-row.assistant .bubble {

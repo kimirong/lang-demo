@@ -1,6 +1,7 @@
 <script setup>
 import { nextTick, ref, watch } from 'vue'
 import ApprovalCard from './ApprovalCard.vue'
+import Markdown from './Markdown.vue'
 
 // 消息流：文本气泡（user / assistant）+ 审批卡片（approval）+ 思考中指示
 const props = defineProps({
@@ -33,10 +34,13 @@ function fmtTime(ts) {
 <template>
   <div ref="scroller" class="chat-messages">
     <template v-for="(m, i) in messages" :key="i">
-      <!-- 文本气泡 -->
+      <!-- 文本气泡：助理回复渲染 Markdown，用户消息保持纯文本 -->
       <div v-if="m.kind === 'text'" class="msg-row" :class="m.role">
         <div class="msg-col">
-          <div class="bubble">{{ m.content }}</div>
+          <div v-if="m.role === 'assistant'" class="bubble">
+            <Markdown :content="m.content" />
+          </div>
+          <div v-else class="bubble">{{ m.content }}</div>
           <div class="meta">{{ fmtTime(m.ts) }}</div>
         </div>
       </div>
