@@ -122,11 +122,16 @@
 
 ---
 
-## 七、下一步：Phase 5 — LangSmith
+## 七、下一步：Phase 6 — 综合实战项目 🏆
 
-- **Tracing**：`LANGSMITH_API_KEY` + `LANGSMITH_TRACING=true` 自动记录输入/输出/耗时/token
-- **调试**：可视化 trace 树，定位哪一步出问题
-- **数据集 + 评测**：给 RAG/agent 建测试集，批量打分，改提示词前后对比
-- ⚠️ LangSmith 是云端服务（smith.langchain.com），国内直连可能不稳，需要代理
+前五个阶段学完了 LangChain / LangGraph / LangSmith 的完整能力，最后把它们拼成一个可交付的应用。
 
-然后进入 **Phase 6 — 综合实战项目**：DeepSeek + RAG + 多工具 + LangGraph 编排 + 人工确认 + LangSmith 监控，打包成可交付的 API 应用。
+**项目设想：「DeepSeek 智能客服助手」**
+- RAG 知识库（员工手册）→ 回答业务问题
+- 计算工具 → 处理数值
+- 多轮记忆（thread_id + checkpointer）→ 记住上下文
+- 人工确认（interrupt）→ 关键操作需审批
+- LangSmith → 全程监控 + 评测守护
+- 最后打包成 API 服务（FastAPI / LangServe），真正跑起来被调用
+
+> 在正式编写代码前，建议先用 EnterPlanMode 规划项目结构与实现步骤。

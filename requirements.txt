@@ -1,0 +1,16 @@
+# lang-demo 依赖（锁定本项目验证过的版本）
+# 安装：pip install -r requirements.txt
+# 注意：Python 3.12 推荐；如果要用 sqlite-vec 做向量库，需要 sqlite3 支持扩展加载
+#       （python.org 的 macOS 版默认禁用，Homebrew 版可用，详见 README）
+
+langchain==1.3.14
+langchain-community==0.4.2
+langchain-huggingface==1.2.2
+langchain-openai==1.4.1
+langchain-text-splitters==1.1.2
+langgraph==1.2.10
+langsmith==0.10.15
+python-dotenv>=1.0
+sentence-transformers==5.6.1
+sqlite-vec==0.1.9
+pypdf>=6.0
