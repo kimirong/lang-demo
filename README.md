@@ -1,5 +1,7 @@
 # LangChain / LangGraph / LangSmith 实战学习仓库
 
+> 🌐 **English version**: [README.en.md](README.en.md)
+
 > 用 **DeepSeek** 模型，从零到一、**项目驱动**地学习 LangChain 三件套的完整学习仓库。
 > 每个阶段都有可运行的脚本，代码里中文注释讲解每一行在做什么。
 
